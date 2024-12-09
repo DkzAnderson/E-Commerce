@@ -1,4 +1,5 @@
 import { FaCartPlus } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 
 
@@ -32,8 +33,8 @@ interface Props {
 export const ProductCard : React.FC<Props> = ({Game}) => {
 
   const styles = {
-    main: 'size-full relative font-roboto',
-    content: 'overflow-hidden flex flex-col rounded-lg',
+    main: 'size-full relative font-roboto ',
+    content: 'overflow-hidden relative flex flex-col rounded-lg shadow-[0px_0px_6px_-2px] shadow-black dark:shadow-white',
 
     posterBox: 'h-auto w-full cursor-pointer',
     poster: 'size-full object-cover',
@@ -41,7 +42,7 @@ export const ProductCard : React.FC<Props> = ({Game}) => {
     data: {
       main: 'flex relative flex-col gap-0.5 px-2 py-3 dark:text-white bg-sky-200 dark:bg-black/85',
       title: 'font-bold text-xl max-w-full truncate',
-      price: 'absolute right-2 bottom-2 text-green-800 dark:text-lime-500 font-bold text-2xl text-end',
+      price: 'absolute top-0 left-0 pl-1 pr-3 rounded-br-full bg-green-800 dark:bg-lime-500 text-white dark:text-black font-bold text-2xl text-end',
       weight: 'text-sm',
       genderList: 'flex w-full gap-1.5 items-center ',
       genderTxt: 'text-sm max-w-16 px-1 rounded bg-sky-700 dark:bg-cyan-500 font-light text-zinc-300 dark:text-zinc-900 truncate',
@@ -49,12 +50,15 @@ export const ProductCard : React.FC<Props> = ({Game}) => {
     },
 
     cartBtn: {
-      main: 'absolute flex justify-center items-center size-14 bg-green-800 dark:bg-lime-500 rounded-full right-2 -top-7',
+      main: 'absolute flex justify-center items-center size-12 bg-green-800/75 dark:bg-lime-500 rounded-full right-2 -top-8',
       icon: 'text-3xl text-white dark:text-black mr-1 mt-1'
     }
 
   }
 
+  const GetProduct = ()=> {
+    console.log(Game)
+  }
 
   function GetWeight (){
     let value: string[] | string = '' ;
@@ -71,17 +75,22 @@ export const ProductCard : React.FC<Props> = ({Game}) => {
     <article className={styles.main}>
       <div className={styles.content}>
         {/* Poster */}
-        <picture className={styles.posterBox}>
+        <Link
+          className={styles.posterBox}
+          to={`details/${Game.name}`}
+        >
           <img
             className={styles.poster} 
             src={Game.poster} 
             alt={Game.name+'-poster'} 
           />
-        </picture>
+        </Link>
+
         {/* Datos */}
         <div className={styles.data.main}>
           <button
             className={styles.cartBtn.main}
+            onClick={()=>GetProduct()}
           >
             <FaCartPlus className={styles.cartBtn.icon}/>
           </button>
@@ -108,10 +117,10 @@ export const ProductCard : React.FC<Props> = ({Game}) => {
             ))}
           </ul>
 
-          <h2 className={styles.data.price}>
+        </div>
+        <h2 className={styles.data.price}>
             s/{Game.price}
           </h2>
-        </div>
 
       </div>
     </article>

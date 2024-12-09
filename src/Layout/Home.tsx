@@ -1,27 +1,18 @@
 import { Header } from "../Components/Header/Header"
-import { ProductCard } from "../Components/ProductCard/ProductCard"
-import { db } from "../DataBase/Test"
+import { ProductList } from "../Components/ProductList/ProductList"
+
 
 export const Home = () => {
     const styles = {
-        main: 'w-full min-h-screen flex relative',
-        content: 'size-full flex flex-col dark:bg-slate-900',
-
+        main: 'w-full min-h-screen flex relative bg-black',
+        content: 'size-full flex flex-col bg-gradient-to-br from-cyan-100 dark:from-slate-950 to-sky-300 dark:to-violet-900',
     }
 
   return (
     <section className={styles.main}>
         <div className={styles.content}>
             <Header/>
-            <ul className='w-full min-h-96 border border-black pt-24 pb-16 flex flex-col px-8 gap-y-5'>
-              {db.map((data,i)=>(
-                <li
-                  key={i}
-                >
-                  <ProductCard Game={data}/>
-                </li>
-              ))}
-            </ul>
+            <ProductList/>
 
         </div>
     </section>

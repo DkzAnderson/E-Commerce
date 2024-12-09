@@ -6,15 +6,24 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { ThemeProvider } from './Components/Header/ChangeThemes'
 import { Home } from './Layout/Home'
+import { ProductDetails } from './Components/ProductDetails/ProductDetails'
 
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <Home/>,
+    },
+    {
+      path: 'details/:id',
+      element: <ProductDetails/>
+    }
 
-
-const router = createBrowserRouter([
+  ],
   {
-    path: '/E-Commerce',
-    element: <Home/>
+    basename: '/E-Commerce/'
   }
-])
+)
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

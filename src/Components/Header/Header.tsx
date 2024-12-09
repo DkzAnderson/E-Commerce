@@ -8,7 +8,7 @@ const ThemeToggle: React.FC = () => {
 
   const styles = {
     main: 'flex p-2 rounded dark:text-white gap-3 items-center',
-    icon : 'size-12 bg-zinc-900 dark:bg-zinc-800 rounded flex items-center justify-center',
+    icon : 'size-8 bg-zinc-900 dark:bg-zinc-800 rounded flex items-center justify-center',
     text: ''
   }
 
@@ -43,8 +43,8 @@ export const Header = () => {
 
   const styles = {
 
-    main: 'fixed flex w-full h-20 z-20 dark:text-white font-roboto',
-    content: 'relative flex z-10 size-full justify-between p-2 bg-teal-300 dark:bg-slate-950 items-center',
+    main: 'fixed flex w-screen h-20 z-20 dark:text-white font-roboto',
+    content: 'relative flex z-10 size-full justify-between p-2 bg-gradient-to-tr from-cyan-100 dark:from-slate-950 to-sky-300 dark:to-violet-900 items-center',
     logoBox: ' w-auto h-full rounded overflow-hidden',
     logo: 'size-full object-cover',
 
@@ -56,27 +56,28 @@ export const Header = () => {
     },
 
     menuList : {
-      main: `absolute ${menuIsOpen ? 'translate-y-20' : 'z-0 -translate-y-40'} bg-teal-300 dark:bg-slate-950 h-auto w-full duration-300`,
+      main: `absolute ${menuIsOpen ? 'translate-y-20' : 'z-0 -translate-y-40'} bg-gradient-to-br from-cyan-100 dark:from-slate-950 to-sky-300 dark:to-violet-900 h-auto w-full duration-300`,
       itemsMain: 'w-full flex flex-col',
-      itemsBox : 'size-full flex gap-3 p-3 font-bold text-2xl items-center',
-      icon: 'text-4xl'
+      itemsBox : 'size-full flex gap-3 p-3 font-bold text-xl items-center',
+      icon: 'text-2xl'
     },
 
     categoryList: {
       main: `${categoriesIsOpen ? 'flex flex-col h-52' : 'h-0'}  duration-300 overflow-auto`,
-      items: 'flex gap-3 ml-5 text-2xl p-2 items-center',
-      icons: 'bg-zinc-800  size-10 text-4xl flex items-center justify-center rounded',
+      items: 'flex gap-3 ml-5 text-xl p-2 items-center',
+      icons: 'bg-zinc-800  size-8 text-2xl flex items-center justify-center rounded',
     },
 
     themeList: {
-      main: `${themeIsOpen ? 'flex flex-col h-20' : 'h-0'} duration-300`,
-      items: `${themeIsOpen ? 'flex': 'hidden'} gap-2 ml-5 items-center text-2xl p-2 duration-300`,
-      icons: `flex bg-zinc-900 rounded size-12 items-center justify-center duration-300`
+      main: `${themeIsOpen ? 'flex flex-col h-14' : 'h-0'} duration-300`,
+      items: `${themeIsOpen ? 'flex': 'hidden'} gap-2 ml-5 items-center text-xl p-2 duration-300`,
+      icons: `flex bg-zinc-900 rounded size-8 items-center justify-center duration-300`
     }
   }
 
   return (
     <section className={styles.main}>
+    {/* Menu cerrado */}
       <div className={styles.content}>
         <picture className={styles.logoBox}>
           <img 
@@ -85,6 +86,7 @@ export const Header = () => {
             alt="logo" 
           />
         </picture>
+
         <button className={styles.menuIcon.main}
           onClick={()=>setMenuOpen(!menuIsOpen)}
         >
@@ -93,7 +95,7 @@ export const Header = () => {
           <div className={styles.menuIcon.bottom}></div>
         </button>
       </div>
-
+    {/* Menu abierto */}
       <ul className={styles.menuList.main}>
         {menuOptions.map((data, i) => {
           switch (data.name) {
@@ -154,7 +156,12 @@ export const Header = () => {
                   </div>
 
                   <ul className={styles.themeList.main}>
-                    <li className={styles.themeList.items}>
+                    <li className={styles.themeList.items}
+                      onClick={()=>{
+                        setMenuOpen(false);
+                        setCategories(false);
+                      }}
+                    >
                       <ThemeToggle/>
                     </li>
                   </ul>
@@ -193,7 +200,7 @@ export const Header = () => {
                 <li key={i}>
                   <Link
                     className={styles.menuList.itemsMain}
-                    to={''}
+                    to={`${data.url}`}
                   >
                     <div className={styles.menuList.itemsBox}>
                       <span className={styles.menuList.icon}>
